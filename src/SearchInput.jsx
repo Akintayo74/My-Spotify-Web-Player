@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function SearchInput({ token, onSearchResults }) {
     const [query, setQuery] = useState('');
@@ -40,15 +42,24 @@ function SearchInput({ token, onSearchResults }) {
     return (
         <div className="search-container">
             <form onSubmit={handleSearch} className="search-form">
-                <input 
-                    type="text" 
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search tracks, artists, albums..."
-                    className="search-input"
-                />
+                <div className='search-input-wrapper'>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon"  />
+                    <input 
+                        type="text" 
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Search tracks, artists, albums..."
+                        className="search-input"
+                        onKeyDown={ (e) => {
+                            if (e.key === 'Enter' && query.trim()){
+                                handleSearch(e)
+                            }
+                        }}
+                    />
+                </div>
                 
-                <select 
+                
+                {/* <select 
                     value={searchType} 
                     onChange={(e) => setSearchType(e.target.value)}
                     className="search-type-select"
@@ -56,15 +67,15 @@ function SearchInput({ token, onSearchResults }) {
                     <option value="track">Tracks</option>
                     <option value="artist">Artists</option>
                     <option value="album">Albums</option>
-                </select>
+                </select> */}
                 
-                <button 
+                {/* <button 
                     type="submit" 
                     disabled={isLoading || !query.trim()}
                     className="search-button"
                 >
                     {isLoading ? 'Searching...' : 'Search'}
-                </button>
+                </button> */}
             </form>
 
             {error && <div className="search-error">{error}</div>}
