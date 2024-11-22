@@ -5,6 +5,8 @@ const dotenv = require('dotenv')
 const port = 5000
 
 global.access_token = ''
+global.refresh_token = ''
+global.token_expiry = null 
 
 dotenv.config()
 
@@ -71,6 +73,8 @@ app.get('/auth/callback', (req, res) => {
         
         if (response.statusCode === 200 && body.access_token) {
             global.access_token = body.access_token;
+            global.refresh_token = body.refresh_token; 
+            global.token_expiry = Date.now() + (body.expires_in * 1000);
             return res.redirect('http://localhost:5173/');
         } else {
             console.error('Token request failed:', body);
@@ -79,11 +83,51 @@ app.get('/auth/callback', (req, res) => {
     })
 })
 
-app.get('/auth/token', (req, res) => {
-    res.json({
-        access_token: global.access_token
-    })
-})
+
+app.get('/auth/token', async (req, res) => {
+    if (global.token_expiry && Date.now() > global.token_expiry - 60000) {
+        try {
+            const refreshOptions = {
+                url: 'https://accounts.spotify.com/api/token',
+                form: {
+                    grant_type: 'refresh_token',
+                    refresh_token: global.refresh_token
+                },
+                headers: {
+                    'Authorization': 'Basic ' + (Buffer.from(spotify_client_id + ':' + spotify_client_secret).toString('base64')),
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                json: true
+            };
+
+            request.post(refreshOptions, function(error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    global.access_token = body.access_token;
+                    global.token_expiry = Date.now() + (body.expires_in * 1000);
+                    
+                    // New refresh token might be provided
+                    if (body.refresh_token) {
+                        global.refresh_token = body.refresh_token;
+                    }
+
+                    res.json({
+                        access_token: global.access_token
+                    });
+                } else {
+                    console.error('Error refreshing token:', error || body);
+                    res.status(500).json({ error: 'Failed to refresh token' });
+                }
+            });
+        } catch (error) {
+            console.error('Error in token refresh:', error);
+            res.status(500).json({ error: 'Failed to refresh token' });
+        }
+    } else {
+        res.json({
+            access_token: global.access_token
+        });
+    }
+});
 
 
 
@@ -97,7 +141,7 @@ app.get('/auth/token', (req, res) => {
 
 // New route for search functionality
 app.get('/search', (req, res) => {
-    // Get query parameters from the request
+   
     const { q, type = 'track', limit = 10 } = req.query;
 
     // Check if access token is available
@@ -120,14 +164,14 @@ app.get('/search', (req, res) => {
         json: true
     };
 
-    // Make the search request
+    
     request.get(searchOptions, function(error, response, body) {
         if (error) {
             return res.status(500).json({ error: 'Search request failed' });
         }
 
         if (response.statusCode === 200) {
-            // Return the search results
+            
             res.json(body);
         } else {
             res.status(response.statusCode).json({ 
@@ -137,12 +181,6 @@ app.get('/search', (req, res) => {
         }
     });
 });
-
-// ... (rest of the code remains the same)
-
-
-
-
 
 
 

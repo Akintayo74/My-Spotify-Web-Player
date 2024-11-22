@@ -201,3 +201,44 @@ img { background: transparent; }
   border: none;
   background-color: #18ab29;
 }
+
+
+
+.seek-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.seek-slider {
+  flex: 1;
+  height: 4px;
+}
+
+.time-position,
+.time-duration {
+  font-size: 12px;
+  min-width: 45px;
+}
+
+
+
+
+/* .search-results{
+  display: grid;
+  grid-gap: ;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 200px 200px;
+}
+
+.featured-result{
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+
+.remaining-results{
+  grid-column-start: ;
+  grid-column-end: ;
+} */

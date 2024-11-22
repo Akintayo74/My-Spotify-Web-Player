@@ -58,17 +58,38 @@ function SearchResults({ results, searchType, onPlayTrack }) {
     );
 
     const renderItems = () => {
-        switch(searchType) {
-            case 'track':
-                return results.map(renderTrackItem);
-            case 'artist':
-                return results.map(renderArtistItem);
-            case 'album':
-                return results.map(renderAlbumItem);
-            default:
-                return null;
-        }
-    };
+
+        const limitedResults = results.slice(0, 5)
+
+        const firstResult = limitedResults[0];
+        const remainingResults = limitedResults.slice(1);
+
+        const getItemByType = (item) => {
+            switch(searchType) {
+                case 'track':
+                    return renderTrackItem(item);
+                case 'artist':
+                    return renderArtistItem(item);
+                case 'album':
+                    return renderAlbumItem(item); 
+                default:
+                    return null;
+            }
+        };
+        
+    
+
+        return (
+            <div className='search-results'>
+                <div className="featured-result">
+                    {getItemByType(firstResult)}
+                </div>
+                <div className="remaining-results">
+                    {remainingResults.map(item => getItemByType(item))}
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="search-results-container">

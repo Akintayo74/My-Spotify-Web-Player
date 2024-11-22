@@ -18,8 +18,48 @@ function WebPlayback(props) {
     const [isInitialized, setIsInitialized] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const [searchType, setSearchType] = useState('track');
+    const [position, setPosition] = useState(0);
+    const [duration, setDuration] = useState(0);
     const playerRef = useRef(null);
     const initializationTimer = useRef(null);
+    const stateCheckInterval = useRef(null);
+
+    // Add new function to check playback state
+    const checkPlaybackState = useCallback(async () => {
+        if (!playerRef.current || !isInitialized) return;
+
+        const state = await playerRef.current.getCurrentState();
+        if (!state) {
+            console.error('User is not playing music through the Web Playback SDK');
+            setActive(false);
+            return;
+        }
+
+        setTrack(state.track_window.current_track);
+        setPaused(state.paused);
+        setPosition(state.position);
+        setDuration(state.duration);
+        setActive(true);
+    }, [isInitialized]);
+
+
+    const handleSeek = useCallback(async (event) => {
+        const seekPosition = parseInt(event.target.value);
+        if (!playerRef.current || !isInitialized) return;
+
+        await playerRef.current.seek(seekPosition);
+        setPosition(seekPosition);
+    }, [isInitialized]);
+
+    // Format time in MM:SS
+    const formatTime = (milliseconds) => {
+        const totalSeconds = Math.floor(milliseconds / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    };
+
+
 
     const transferPlaybackHere = useCallback(async (deviceId) => {
         try {
@@ -48,6 +88,19 @@ function WebPlayback(props) {
             console.error("Error transferring playback:", error);
         }
     }, [props.token]);
+
+
+    useEffect(() => {
+        if (isInitialized) {
+            stateCheckInterval.current = setInterval(checkPlaybackState, 1000);
+            return () => {
+                if (stateCheckInterval.current) {
+                    clearInterval(stateCheckInterval.current);
+                }
+            };
+        }
+    }, [isInitialized, checkPlaybackState]);
+
 
     const handlePlayPause = useCallback(() => {
         if (!playerRef.current || !isInitialized) {
@@ -148,7 +201,11 @@ function WebPlayback(props) {
             const player = new window.Spotify.Player({
                 name: "Web Playback SDK",
                 getOAuthToken: cb => { cb(props.token) },
-                volume: 0.5
+                volume: 0.5,
+
+                enableMediaSession: true,
+                maxAudioDelay: 150,
+                robustnessLevel: "GRACEFUL_DEGRADATION"
             });
 
             playerRef.current = player;
@@ -224,23 +281,21 @@ function WebPlayback(props) {
 
     return (
         <div className="container">
-
             <div className="search-wrapper">
                 <SearchInput 
                     token={props.token} 
                     onSearchResults={handleSearchResults} 
                 />
                 {searchResults.length > 0 && (
-                <SearchResults 
-                    results={searchResults} 
-                    searchType={searchType}
-                    onPlayTrack={handlePlaySearchTrack}
-                />
+                    <SearchResults 
+                        results={searchResults} 
+                        searchType={searchType}
+                        onPlayTrack={handlePlaySearchTrack}
+                    />
                 )}
             </div>
 
             <div className="main-wrapper">
-
                 {current_track.album.images[0].url && (
                     <img 
                         src={current_track.album.images[0].url} 
@@ -252,6 +307,22 @@ function WebPlayback(props) {
                 <div className="now-playing__side">
                     <div className="now-playing__name">{current_track.name}</div>
                     <div className="now-playing__artist">{current_track.artists[0].name}</div>
+                    
+                    
+                    {/* Seek bar */}
+                    <div className="seek-bar">
+                        <span className="time-position">{formatTime(position)}</span>
+                        <input
+                            type="range"
+                            value={position}
+                            min={0}
+                            max={duration}
+                            className="seek-slider"
+                            onChange={handleSeek}
+                        />
+                        <span className="time-duration">{formatTime(duration)}</span>
+                    </div>
+
 
                     <button 
                         className="btn-spotify" 
