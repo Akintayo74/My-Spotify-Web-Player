@@ -120,20 +120,10 @@ img { background: transparent; }
   /* min-width: 100px; */
 }
 
-.search-form{
-  /* display: flex; */
-  grid-area: s;
-}
+
 
 .search-input-wrapper{
   display: flex;
-
-
-
-  /* position: absolute; */
-
-
-
 
   flex-direction: row;
   border: 1px solid grey;
@@ -179,20 +169,76 @@ img { background: transparent; }
 }
 
 
-
+/* Search Results */
 .search-results-container {
-  position: absolute;
+  position: relative;
   width: 100%;
   top: 100px; /* Position below the search input */
   left: 0;
 }
 
+.search-results-empty {
+  text-align: center;
+  padding: 20px;
+  color: #aaa;
+}
 
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
 
+.featured-result {
+  width: 100%;
+}
 
+.featured-result .search-result-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background-color: #282c34;
+  border-radius: 12px;
+}
 
+.featured-result .result-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+}
 
+.remaining-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
 
+.search-result-item {
+  flex: 0 0 auto;
+  width: 200px;
+  background-color: #282c34;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  overflow: hidden;
+}
+
+.remaining-results .search-result-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.remaining-results .result-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.result-details {
+  padding: 15px;
+}
 
 .result-image{
   width: 200px;
@@ -200,20 +246,48 @@ img { background: transparent; }
 }
 
 .result-name{
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.result-artist{
-  font-size: 15px;
+
+.result-artist, .result-album, .result-genres, .result-year {
+  font-size: 14px;
+  color: #aaa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 3px;
 }
+
+
+
+
+
+
 
 .play-button{
+  width: 100%;
   margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 4px;
+  padding: 8px;
+  background-color: #44c767;
   border: none;
-  background-color: #18ab29;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.play-button:hover {
+  background-color: #3db75c;
+}
+
+.search-result-item:hover {
+  background-color: #363b44;
 }
 
 

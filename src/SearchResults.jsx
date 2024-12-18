@@ -5,8 +5,8 @@ function SearchResults({ results, searchType, onPlayTrack }) {
         return <div className="search-results-empty">No results found</div>;
     }
 
-    const renderTrackItem = (track) => (
-        <div key={track.id} className="search-result-item track-item">
+    const renderTrackItem = (track, isFeatured = false) => (
+        <div key={track.id} className={`search-result-item track-item ${isFeatured ? 'featured' : ''}`}>
             <img 
                 src={track.album.images[0]?.url || '/placeholder-image.png'} 
                 alt={track.name} 
@@ -28,8 +28,8 @@ function SearchResults({ results, searchType, onPlayTrack }) {
         </div>
     );
 
-    const renderArtistItem = (artist) => (
-        <div key={artist.id} className="search-result-item artist-item">
+    const renderArtistItem = (artist, isFeatured = false) => (
+        <div key={artist.id} className={`search-result-item artist-item ${isFeatured ? 'featured' : ''}`}>
             <img 
                 src={artist.images[0]?.url || '/placeholder-image.png'} 
                 alt={artist.name} 
@@ -42,8 +42,8 @@ function SearchResults({ results, searchType, onPlayTrack }) {
         </div>
     );
 
-    const renderAlbumItem = (album) => (
-        <div key={album.id} className="search-result-item album-item">
+    const renderAlbumItem = (album, isFeatured = false) => (
+        <div key={album.id} className={`search-result-item album-item ${isFeatured ? 'featured' : ''}`}>
             <img 
                 src={album.images[0]?.url || '/placeholder-image.png'} 
                 alt={album.name} 
@@ -58,34 +58,30 @@ function SearchResults({ results, searchType, onPlayTrack }) {
     );
 
     const renderItems = () => {
-
-        const limitedResults = results.slice(0, 5)
-
+        const limitedResults = results.slice(0, 5);
         const firstResult = limitedResults[0];
         const remainingResults = limitedResults.slice(1);
 
-        const getItemByType = (item) => {
+        const getItemByType = (item, isFeatured = false) => {
             switch(searchType) {
                 case 'track':
-                    return renderTrackItem(item);
+                    return renderTrackItem(item, isFeatured);
                 case 'artist':
-                    return renderArtistItem(item);
+                    return renderArtistItem(item, isFeatured);
                 case 'album':
-                    return renderAlbumItem(item); 
+                    return renderAlbumItem(item, isFeatured);
                 default:
                     return null;
             }
         };
-        
-    
 
         return (
             <div className='search-results'>
                 <div className="featured-result">
-                    {getItemByType(firstResult)}
+                    {getItemByType(firstResult, true)}
                 </div>
                 <div className="remaining-results">
-                    {remainingResults.map(item => getItemByType(item))}
+                    {remainingResults.map(item => getItemByType(item, false))}
                 </div>
             </div>
         );
