@@ -236,41 +236,42 @@ img { background: transparent; }
 
 
 
+
+
+.seek-bar-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(40, 44, 52, 0.9); /* Same as .App-header background with some transparency */
+  padding: 10px 20px;
+  z-index: 1000; /* Ensure it's above other elements */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
 .seek-bar {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
-  margin: 10px 0;
+  max-width: 800px; /* Limit max width for better readability */
+  margin: 0 auto;
 }
 
 .seek-slider {
   flex: 1;
   height: 4px;
+  cursor: pointer;
 }
 
 .time-position,
 .time-duration {
   font-size: 12px;
   min-width: 45px;
+  color: #eee;
 }
 
-
-
-
-/* .search-results{
-  display: grid;
-  grid-gap: ;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 200px 200px;
+/* Adjust main-wrapper to have space at bottom for seek bar */
+.main-wrapper {
+  padding-bottom: 80px; /* Adjust based on seek bar height */
 }
-
-.featured-result{
-  grid-column-start: 1;
-  grid-column-end: 7;
-}
-
-.remaining-results{
-  grid-column-start: ;
-  grid-column-end: ;
-} */

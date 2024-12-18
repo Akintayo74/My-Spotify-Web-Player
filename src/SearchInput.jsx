@@ -58,24 +58,7 @@ function SearchInput({ token, onSearchResults }) {
                     />
                 </div>
                 
-                
-                {/* <select 
-                    value={searchType} 
-                    onChange={(e) => setSearchType(e.target.value)}
-                    className="search-type-select"
-                >
-                    <option value="track">Tracks</option>
-                    <option value="artist">Artists</option>
-                    <option value="album">Albums</option>
-                </select> */}
-                
-                {/* <button 
-                    type="submit" 
-                    disabled={isLoading || !query.trim()}
-                    className="search-button"
-                >
-                    {isLoading ? 'Searching...' : 'Search'}
-                </button> */}
+            
             </form>
 
             {error && <div className="search-error">{error}</div>}

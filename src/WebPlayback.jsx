@@ -279,6 +279,7 @@ function WebPlayback(props) {
         );
     }
 
+   
     return (
         <div className="container">
             <div className="search-wrapper">
@@ -308,45 +309,47 @@ function WebPlayback(props) {
                     <div className="now-playing__name">{current_track.name}</div>
                     <div className="now-playing__artist">{current_track.artists[0].name}</div>
                     
-                    
-                    {/* Seek bar */}
-                    <div className="seek-bar">
-                        <span className="time-position">{formatTime(position)}</span>
-                        <input
-                            type="range"
-                            value={position}
-                            min={0}
-                            max={duration}
-                            className="seek-slider"
-                            onChange={handleSeek}
-                        />
-                        <span className="time-duration">{formatTime(duration)}</span>
+                    <div className="player-controls">
+                        <button 
+                            className="btn-spotify" 
+                            onClick={handlePreviousTrack}
+                            disabled={!is_active || !isInitialized}
+                        >
+                            &lt;&lt;
+                        </button>
+
+                        <button 
+                            className="btn-spotify" 
+                            onClick={handlePlayPause}
+                            disabled={!is_active || !isInitialized}
+                        >
+                            {is_paused ? "PLAY" : "PAUSE"}
+                        </button>
+
+                        <button 
+                            className="btn-spotify" 
+                            onClick={handleNextTrack}
+                            disabled={!is_active || !isInitialized}
+                        >
+                            &gt;&gt;
+                        </button>
                     </div>
+                </div>
+            </div>
 
-
-                    <button 
-                        className="btn-spotify" 
-                        onClick={handlePreviousTrack}
-                        disabled={!is_active || !isInitialized}
-                    >
-                        &lt;&lt;
-                    </button>
-
-                    <button 
-                        className="btn-spotify" 
-                        onClick={handlePlayPause}
-                        disabled={!is_active || !isInitialized}
-                    >
-                        {is_paused ? "PLAY" : "PAUSE"}
-                    </button>
-
-                    <button 
-                        className="btn-spotify" 
-                        onClick={handleNextTrack}
-                        disabled={!is_active || !isInitialized}
-                    >
-                        &gt;&gt;
-                    </button>
+            {/* Sticky Seek Bar */}
+            <div className="seek-bar-container">
+                <div className="seek-bar">
+                    <span className="time-position">{formatTime(position)}</span>
+                    <input
+                        type="range"
+                        value={position}
+                        min={0}
+                        max={duration}
+                        className="seek-slider"
+                        onChange={handleSeek}
+                    />
+                    <span className="time-duration">{formatTime(duration)}</span>
                 </div>
             </div>
         </div>
