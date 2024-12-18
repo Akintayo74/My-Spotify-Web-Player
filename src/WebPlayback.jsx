@@ -281,59 +281,65 @@ function WebPlayback(props) {
 
    
     return (
-        <div className="container">
-            <div className="search-wrapper">
-                <SearchInput 
-                    token={props.token} 
-                    onSearchResults={handleSearchResults} 
-                />
-                {searchResults.length > 0 && (
-                    <SearchResults 
-                        results={searchResults} 
-                        searchType={searchType}
-                        onPlayTrack={handlePlaySearchTrack}
+        <div className="app-container">
+            <div className="main-content">
+                <div className="search-wrapper">
+                    <SearchInput 
+                        token={props.token} 
+                        onSearchResults={handleSearchResults} 
                     />
-                )}
+                    {searchResults.length > 0 && (
+                        <SearchResults 
+                            results={searchResults} 
+                            searchType={searchType}
+                            onPlayTrack={handlePlaySearchTrack}
+                        />
+                    )}
+                </div>
+
+                <div className="main-wrapper">
+                    {/* Main content can remain mostly the same, 
+                        but we'll remove the album cover and player controls */}
+                </div>
             </div>
 
-            <div className="main-wrapper">
+            {/* Sidebar */}
+            <div className="sidebar">
                 {current_track.album.images[0].url && (
                     <img 
                         src={current_track.album.images[0].url} 
-                        className="now-playing__cover" 
+                        className="sidebar-album-cover" 
                         alt={`${current_track.name} album cover`} 
                     />
                 )}
 
-                <div className="now-playing__side">
-                    <div className="now-playing__name">{current_track.name}</div>
-                    <div className="now-playing__artist">{current_track.artists[0].name}</div>
-                    
-                    <div className="player-controls">
-                        <button 
-                            className="btn-spotify" 
-                            onClick={handlePreviousTrack}
-                            disabled={!is_active || !isInitialized}
-                        >
-                            &lt;&lt;
-                        </button>
+                <div className="now-playing__name">{current_track.name}</div>
+                <div className="now-playing__artist">{current_track.artists[0].name}</div>
 
-                        <button 
-                            className="btn-spotify" 
-                            onClick={handlePlayPause}
-                            disabled={!is_active || !isInitialized}
-                        >
-                            {is_paused ? "PLAY" : "PAUSE"}
-                        </button>
+                <div className="sidebar-player-controls">
+                    <button 
+                        className="btn-spotify" 
+                        onClick={handlePreviousTrack}
+                        disabled={!is_active || !isInitialized}
+                    >
+                        Previous
+                    </button>
 
-                        <button 
-                            className="btn-spotify" 
-                            onClick={handleNextTrack}
-                            disabled={!is_active || !isInitialized}
-                        >
-                            &gt;&gt;
-                        </button>
-                    </div>
+                    <button 
+                        className="btn-spotify" 
+                        onClick={handlePlayPause}
+                        disabled={!is_active || !isInitialized}
+                    >
+                        {is_paused ? "Play" : "Pause"}
+                    </button>
+
+                    <button 
+                        className="btn-spotify" 
+                        onClick={handleNextTrack}
+                        disabled={!is_active || !isInitialized}
+                    >
+                        Next
+                    </button>
                 </div>
             </div>
 

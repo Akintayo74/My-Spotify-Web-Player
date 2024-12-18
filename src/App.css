@@ -58,12 +58,6 @@ body {
   z-index: 1;
 }
 
-/* .container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-} */
 
 .main-container {
   flex: 1;
@@ -184,19 +178,7 @@ img { background: transparent; }
   background-color: #282c34;
 }
 
-/* .search-results-container{
-  
-  height: 100%;
-  display: grid;
-  grid-gap: 3px;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 40px auto 40px;
-  grid-template-areas: 
-      "s s s s s s s s s s s s"
-      "f f f f f r r r r r r r"
-      "p p p p p p p p p p p p";
-  
-} */
+
 
 .search-results-container {
   position: absolute;
@@ -274,4 +256,68 @@ img { background: transparent; }
 /* Adjust main-wrapper to have space at bottom for seek bar */
 .main-wrapper {
   padding-bottom: 80px; /* Adjust based on seek bar height */
+}
+
+
+
+/* Sidebar */
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+.main-content::-webkit-scrollbar{
+  display: none;
+}
+
+.sidebar {
+  width: 25rem;
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-left: 1px solid #444;
+}
+
+.sidebar-album-cover {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.sidebar-player-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-player-controls .btn-spotify {
+  width: 100%;
+  max-width: 220px;
+  text-align: center;
+  border: none;
+}
+
+.now-playing__name {
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 1.2em;
+}
+
+.now-playing__artist {
+  text-align: center;
+  color: #aaa;
+  margin-bottom: 15px;
 }
