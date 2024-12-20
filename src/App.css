@@ -181,8 +181,7 @@ body {
 }
 
 .featured-result .result-name{
-  font-size: 20px;
-  /* text-align: center; */
+  font-size: 1.5em;
 }
 
 .featured-result .result-details{
@@ -190,6 +189,7 @@ body {
   flex-direction: column;
   text-align: center;
   justify-content: center;
+  width: 250px;
 }
 
 .featured-result .result-artist{
@@ -209,9 +209,9 @@ body {
 }
 
 
-.search-result-item {
+.remaining-results .search-result-item {
   flex: 0 0 auto;
-  /* width: 500px; */
+  width: 250px;
   background-color: #282c34;
   border-radius: 8px;
   transition: background-color 0.2s ease;
@@ -225,8 +225,19 @@ body {
   border-radius: 8px 8px 0 0;
 }
 
-.result-details {
+.remaining-results .result-album{
+  font-size: 12px;
+  /* color: #aaa; */
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* margin-bottom: 3px; */
+  /* width: 100% */
+}
+
+.remaining-results .result-details {
   padding: 15px;
+  width: 100%;
 }
 
 .result-name{
@@ -245,6 +256,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 3px;
+  width: 100%
 }
 
 .play-button{
