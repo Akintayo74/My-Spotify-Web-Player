@@ -15,6 +15,8 @@ body {
   font-size: 3vmin;
 }
 
+
+/* Login Page */
 .App {
   text-align: center;
 }
@@ -30,9 +32,9 @@ body {
   color: white;
 }
 
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 
 
 .background {
@@ -46,6 +48,8 @@ body {
   position: absolute;
 }
 
+
+/* Switch transfer instance */
 .main-wrapper {
   padding-top: 20px;
   align-items: center;
@@ -59,30 +63,13 @@ body {
 }
 
 
+/* Home Page */
 .main-container {
   flex: 1;
 }
 
-.now-playing__name {
-  font-size: 1.5em;
-  margin-bottom: 0.2em;
-}
-
-.now-playing__artist {
-  margin-bottom: 1em;
-}
-
 .now-playing__status {
   margin-bottom: 1em;
-}
-
-.now-playing__cover {
-  border-radius: 8px;
-  float: left;
-  margin-right: 10px;
-  text-align: right;
-  width: 200px;
-  height: 200px;
 }
 
 .now-playing__side {
@@ -113,7 +100,7 @@ img { background: transparent; }
 
 .search-wrapper{
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   justify-content: center;
   padding-top: 40px;
   padding-bottom: 80px;
@@ -171,13 +158,13 @@ img { background: transparent; }
 
 /* Search Results */
 .search-results-container {
-  position: absolute;
-  top: 100px;  /* Instead of margin-top */
-  left: 50%;   /* Center horizontally */
-  transform: translateX(-50%);  /* Offset by half width to truly center */
+  /* position: absolute; */
+  top: 100px;
+  /* left: 50%;   */
+  /* transform: translateX(-50%); */
   width: 100%;
-  max-width: 1200px;  /* Or whatever maximum width you prefer */
-  z-index: 1;  /* Ensure it's above other elements */
+  /* max-width: 1200px; */
+  z-index: 1;
 }
 
 .search-results-empty {
@@ -191,6 +178,7 @@ img { background: transparent; }
   flex-direction: column;
   gap: 30px;
 }
+
 
 .featured-result {
   width: 500px;
@@ -226,14 +214,19 @@ img { background: transparent; }
   overflow: hidden;
 }
 
+.track-item{
+  display: flex;
+  flex-direction: row;
+  /* width: 800px; */
+}
+
 .remaining-results .search-result-item {
   display: flex;
   flex-direction: column;
 }
 
+
 .remaining-results .result-image {
-  /* width: 100%; */
-  /* height: auto; */
   aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
@@ -244,7 +237,7 @@ img { background: transparent; }
 }
 
 .result-image{
-  width: 200px;
+  width: 300px;
   border-radius: 20px;
 }
 
@@ -260,6 +253,7 @@ img { background: transparent; }
 
 .result-artist, .result-album, .result-genres, .result-year {
   font-size: 14px;
+  
   color: #aaa;
   white-space: nowrap;
   overflow: hidden;
