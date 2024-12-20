@@ -68,15 +68,6 @@ body {
   flex: 1;
 }
 
-.now-playing__status {
-  margin-bottom: 1em;
-}
-
-.now-playing__side {
-  margin-left: 2%;
-  width: 45%;
-}
-
 .btn-spotify {
   background-color:#44c767;
   border-radius:28px;
@@ -95,9 +86,8 @@ body {
   top:1px;
 }
 
-img { background: transparent; }
 
-
+/* Search body*/
 .search-wrapper{
   display: flex;
   /* position: absolute; */
@@ -108,10 +98,9 @@ img { background: transparent; }
 }
 
 
-
+/* Search Input */
 .search-input-wrapper{
   display: flex;
-
   flex-direction: row;
   border: 1px solid grey;
   border-radius: 0.9rem;
@@ -129,12 +118,11 @@ img { background: transparent; }
 .search-icon{
   padding: 0 10px;
   transition: color 0.2s ease;
-  /* align-items: center; */
   margin-left: 3px;
 }
 
 .search-input-wrapper:focus-within .search-icon {
-  color: #007bff; /* Icon changes color when input is focused */
+  color: #007bff;
 }
 
 .search-input{
@@ -147,12 +135,6 @@ img { background: transparent; }
   color: white;
   font-size: 25px;
   outline: none;
-}
-
-.search-type-select{
-  padding: .7rem;
-  border-radius: 20px;
-  background-color: #282c34;
 }
 
 
@@ -253,19 +235,12 @@ img { background: transparent; }
 
 .result-artist, .result-album, .result-genres, .result-year {
   font-size: 14px;
-  
   color: #aaa;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 3px;
 }
-
-
-
-
-
-
 
 .play-button{
   width: 100%;
@@ -288,9 +263,7 @@ img { background: transparent; }
 }
 
 
-
-
-
+/* Seek Bar */
 .seek-bar-container {
   position: fixed;
   bottom: 0;
@@ -298,7 +271,7 @@ img { background: transparent; }
   width: 100%;
   background-color: rgba(40, 44, 52, 0.9); /* Same as .App-header background with some transparency */
   padding: 10px 20px;
-  z-index: 1000; /* Ensure it's above other elements */
+  z-index: 1000;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -307,7 +280,7 @@ img { background: transparent; }
   align-items: center;
   gap: 10px;
   width: 100%;
-  max-width: 800px; /* Limit max width for better readability */
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -324,15 +297,8 @@ img { background: transparent; }
   color: #eee;
 }
 
-/* Adjust main-wrapper to have space at bottom for seek bar */
-.main-wrapper {
-  padding-bottom: 80px; /* Adjust based on seek bar height */
-}
-
-
 
 /* Sidebar */
-
 .app-container {
   display: flex;
   height: 100vh;
