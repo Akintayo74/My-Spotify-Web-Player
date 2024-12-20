@@ -87,11 +87,12 @@ body {
 }
 
 
-/* Search body*/
+/* Search body: Home and Results page*/
 .search-wrapper{
   display: flex;
-  /* position: absolute; */
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding-top: 40px;
   padding-bottom: 80px;
   width: 100%;
