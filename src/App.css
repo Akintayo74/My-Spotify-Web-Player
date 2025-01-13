@@ -1,6 +1,195 @@
-*{
-  margin: 0;
-  border: 0;
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #333;
+  color: #eee;
+  font-family: Helvetica, Arial;
+}
+
+/* Main playback container */
+.main-wrapper {
+  padding-top: 20px;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  position: relative;
+  width: 80%;
+  z-index: 1;
+}
+
+.now-playing__name {
+  font-size: 1.5em;
+  margin-bottom: 0.2em;
+}
+
+.now-playing__artist {
+  margin-bottom: 1em;
+}
+
+.now-playing__status {
+  margin-bottom: 1em;
+}
+
+.now-playing__cover {
+  border-radius: 8px;
+  float: left;
+  margin-right: 10px;
+  text-align: right;
+  width: 200px;
+  height: 200px;
+}
+
+.now-playing__side {
+  margin-left: 2%;
+  width: 45%;
+}
+
+.btn-spotify {
+  margin: 0 10px;
+  background-color: transparent;
+  border-radius:1.2rem;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  padding:16px 31px;
+  /* border: 2px solid red; */
+}
+
+.search-wrapper{
+  display: flex;
+  position: relative;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+
+
+.search-input-wrapper{
+  display: flex;
+  flex-direction: row;
+  border: 1px solid grey;
+  border-radius: 0.9rem;
+  align-items: center;
+  background-color: #282c34;
+  outline: 1px solid transparent;
+  transition: outline-color 0.2s ease;
+}
+
+.search-input-wrapper:focus-within {
+  outline-color: #007bff; 
+  border-color: #007bff;
+}
+
+.search-icon{
+  padding: 0 10px;
+  transition: color 0.2s ease;
+  margin-left: 3px;
+}
+
+.search-input-wrapper:focus-within .search-icon {
+  color: #007bff; 
+}
+
+.search-input{
+  padding: 1rem;
+  width: 100%;
+  min-width: 400px;
+  border-radius: 0.9rem;
+  background-color: #282c34;
+  border: none;
+  color: white;
+  font-size: 25px;
+  outline: none;
+}
+
+.search-type-select{
+  padding: .7rem;
+  border-radius: 20px;
+  background-color: #282c34;
+}
+
+.search-results-container {
+  position: absolute;
+  width: 100%;
+  top: 100px;
+  left: 0;
+}
+
+
+
+
+
+.result-image{
+  width: 200px;
+  border-radius: 20px;
+}
+
+.result-name{
+  font-size: 20px;
+}
+
+.result-artist{
+  font-size: 15px;
+}
+
+.play-button{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  background-color: #18ab29;
+}
+
+
+
+
+
+.seek-bar-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(40, 44, 52, 0.9); /* Same as .App-header background with some transparency */
+  padding: 10px 20px;
+  z-index: 1000; /* Ensure it's above other elements */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.seek-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 800px; /* Limit max width for better readability */
+  margin: 0 auto;
+}
+
+.seek-slider {
+  flex: 1;
+  height: 4px;
+  cursor: pointer;
+}
+
+.time-position,
+.time-duration {
+  font-size: 12px;
+  min-width: 45px;
+  color: #eee;
+}
+
+/* Adjust main-wrapper to have space at bottom for seek bar */
+.main-wrapper {
+  padding-bottom: 80px; /* Adjust based on seek bar height */
+}

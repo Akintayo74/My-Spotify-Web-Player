@@ -1,0 +1,51 @@
+/* Main Container and Layout */
+.container
+    .search-wrapper
+    .main-wrapper
+    .seek-bar-container
+        .seek-bar
+            .time-position
+            .seek-slider
+            .time-duration
+
+/* Search Component */
+.search-container
+    .search-form
+        .search-input-wrapper
+            .search-icon
+            .search-input
+    .search-error
+
+/* Search Results */
+.search-results-container
+    .search-results-grid
+        .search-results
+            .featured-result
+            .remaining-results
+    .search-results-empty
+
+/* Search Result Items */
+.search-result-item
+    .track-item
+    .artist-item
+    .album-item
+        .result-image
+        .result-details
+            .result-name
+            .result-artist
+            .result-album
+            .result-genres
+            .result-year
+        .play-button
+
+/* Now Playing Section */
+.now-playing__cover
+.now-playing__side
+    .now-playing__name
+    .now-playing__artist
+    .player-controls
+        .btn-spotify
+
+/* State Classes */
+.is-active
+.is-paused
